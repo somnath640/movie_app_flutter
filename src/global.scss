@@ -24,3 +24,72 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.spin{
+    width: 100%;
+    text-align: -webkit-center;
+    margin-top: 100%;
+}
+
+ion-content{
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    --background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+ion-header{
+    background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+ion-segment{
+    background: var(--ion-card-background, var(--ion-background-color, #fff));
+}
+.movie-container{
+    width: 175px;
+    float: left;
+    margin: 8px;
+    height: 290px;
+    max-width: calc(50% - 16px);
+    .image-card {
+        text-align: -webkit-center;
+        background: transparent;
+        box-shadow: none;
+        position: relative;
+        .image-div{
+            overflow: hidden;
+            border-radius: 6px;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 200px;
+            box-shadow: 1px 1px 5px 1px rgb(122 122 122 / 30%);
+            img {
+                max-width: 100%;
+                border: 0;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+        .movie-title{
+            padding: 10px 12px 0;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .fav-btn{
+            position: absolute;
+            top: 175px;
+            background: #2f2f2f;
+            padding: 4px 13px;
+            border-radius: 40px;
+            font-size: 10px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 110px;
+            text-align: center;
+        }
+        
+    }
+}

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+
+  <ion-segment 
+    [(ngModel)]="selectedSegment"
+    mode="ios">
+    <ion-segment-button value="top">
+      <ion-label>Top Rated</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="popular">
+      <ion-label>Popular</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content *ngIf="selectedSegment === 'top'">
+  <div class="spin" *ngIf="showLoader">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <ion-list *ngIf="!showLoader">
+    <div class="movie-container" *ngFor="let movie of topRatedList" (click)="goDetails(movie.id, $event)">
+      <ion-card class="image-card">
+        <ion-card-header class="image-div">
+          <img [src]="getImageFullPath(movie.poster_path)" />
+        </ion-card-header>
+        <ion-card-content class="movie-title">{{movie.title}}</ion-card-content>
+        <div class="fav-btn" (click)="addToFav(movie, $event)">Add To Favourite</div>
+      </ion-card>
+    </div>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event, 'top')" *ngIf="!showLoader">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-content *ngIf="selectedSegment === 'popular'">
+  <div class="spin" *ngIf="showLoader">
+      <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <ion-list *ngIf="!showLoader">
+    <div class="movie-container" *ngFor="let movie of popularList" (click)="goDetails(movie.id, $event)">
+      <ion-card class="image-card">
+        <ion-card-header class="image-div">
+          <img [src]="getImageFullPath(movie.poster_path)" />
+        </ion-card-header>
+        <ion-card-content class="movie-title">{{movie.title}}</ion-card-content>
+        <div class="fav-btn" (click)="addToFav(movie, $event)">Add To Favourite</div>
+      </ion-card>
+    </div>
+  </ion-list>
+  
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event, 'popular')" *ngIf="!showLoader">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

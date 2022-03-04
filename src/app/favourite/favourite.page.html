@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Favourite</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="spin" *ngIf="showLoader">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <ion-list *ngIf="!showLoader">
+    <div *ngIf="favList.length==0">Your Favourite is Empty !</div>
+    <div class="movie-container" *ngFor="let movie of favList.reverse()">
+      <ion-card class="image-card">
+        <ion-card-header class="image-div">
+          <img [src]="getImageFullPath(movie.poster_path)" />
+        </ion-card-header>
+        <ion-card-content class="movie-title">{{movie.title}}</ion-card-content>
+      </ion-card>
+    </div>
+  </ion-list>
+
+  <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event, 'top')" *ngIf="!showLoader">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>
