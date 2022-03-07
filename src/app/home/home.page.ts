@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   topPage: number = 1;
   popPage: number = 1;
   showLoader:boolean = false;
+  sortby:any = "release_date.asc";
 
   constructor(
     public platform: Platform,
@@ -37,11 +38,21 @@ export class HomePage implements OnInit {
     return `https://image.tmdb.org/t/p/w500/${endPath}`;
   }
 
+  onSort(){
+    this.showLoader = true;
+    this.topPage = 1;
+    this.popPage = 1;
+
+    this.fetchTopRatedList();
+    this.fetchPopularList();
+    console.log(this.sortby);
+  }
+
   async fetchTopRatedList(){
     return new Promise(async (resolve) => {
-      await this.httpClient.get('https://api.themoviedb.org/3/movie/top_rated?api_key=b6532f04ddec63af3d34821176fbcb14&language=en-US&page='+this.topPage).subscribe((response) => {
+      await this.httpClient.get('https://api.themoviedb.org/3/movie/top_rated?api_key=b6532f04ddec63af3d34821176fbcb14&language=en-US&page='+this.topPage+"&sort_by="+this.sortby).subscribe((response) => {
         this.topRatedList = this.topPage==1?response!['results']: [...this.topRatedList,...response!['results']];
-        console.log(this.topRatedList);
+        // console.log(this.topRatedList);
         this.showLoader = false;
         resolve(true);
       });
@@ -64,12 +75,12 @@ export class HomePage implements OnInit {
     if(type == "popular"){
       this.popPage = this.popPage+1;
       await this.fetchPopularList();
-      console.log(response);
+      // console.log(response);
       event.target.complete();
     } else{
       this.topPage = this.topPage+1;
       var response  = await this.fetchTopRatedList();
-      console.log(response);
+      // console.log(response);
       event.target.complete();
     }
   }

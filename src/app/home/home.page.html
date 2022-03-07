@@ -5,6 +5,14 @@
     </ion-buttons>
     <ion-title>Home</ion-title>
   </ion-toolbar>
+  <ion-item>
+    <ion-label>Sort By</ion-label>
+    <ion-select [(ngModel)]="sortby" okText="Okay" cancelText="Dismiss" (ionChange)="onSort()">
+      <ion-select-option value="release_date.asc">Latest</ion-select-option>
+      <ion-select-option value="vote_average.asc">Max Rating</ion-select-option>
+      <ion-select-option value="vote_average.desc">Min Rating</ion-select-option>
+    </ion-select>
+  </ion-item>
 
   <ion-segment 
     [(ngModel)]="selectedSegment"

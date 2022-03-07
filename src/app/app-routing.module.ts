@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'details',
     loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
+  },
+  {
+    path: 'mapview',
+    loadChildren: () => import('./mapview/mapview.module').then( m => m.MapviewPageModule)
   }
 ];
 
