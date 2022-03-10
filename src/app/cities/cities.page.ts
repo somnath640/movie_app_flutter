@@ -24,8 +24,7 @@ export class CitiesPage implements OnInit {
   }
 
   extractData(res:any) {
-    let csvData = res || '';
-    this.papa.parse(csvData, {
+    this.papa.parse(res, {
       complete: parsedData => {
         this.headerRow = parsedData.data.splice(0, 1)[0];
         this.csvData = parsedData.data;
@@ -34,13 +33,13 @@ export class CitiesPage implements OnInit {
         this.markers = [];
         //=== Create Map Markers
         this.map.clear().then(() => {
-          csvData.forEach(element => {
+          this.csvData.forEach(element => {
             this.map.addMarker({
-              position: {lat:element.lat, lng:element.lng},
+              position: {lat:element[2], lng:element[3]},
             }).then((marker: Marker) => {
               this.markers.push(marker);
               marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-                alert('clicked');
+                alert(element[0]);
               });
             });
           });
@@ -52,8 +51,8 @@ export class CitiesPage implements OnInit {
 
   loadMap() {
     Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyCpFwSmujg-w4bwz2wYwkLeURdSkuKi2JY',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyCpFwSmujg-w4bwz2wYwkLeURdSkuKi2JY'
+      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyAmF3zBxA2VqPJzgMNhYt5HKvy2BKw1f1U',
+      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyAmF3zBxA2VqPJzgMNhYt5HKvy2BKw1f1U'
     });
 
     let mapOptions: GoogleMapOptions = {
@@ -62,8 +61,8 @@ export class CitiesPage implements OnInit {
            lat: 0,
            lng: 0
          },
-         zoom: 18,
-         tilt: 30
+         zoom: 0,
+         tilt: 0
        }
     };
 
